@@ -1,56 +1,90 @@
-import { Link } from "@heroui/link";
-import { Snippet } from "@heroui/snippet";
-import { Code } from "@heroui/code";
-import { button as buttonStyles } from "@heroui/theme";
-
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
+import { Card, CardBody, CardFooter, CardHeader } from "@heroui/card";
+import { Avatar } from "@heroui/avatar";
+import * as Icons from "@heroicons/react/24/outline";
+import { Button } from "@heroui/button";
 
 export default function Home() {
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <div className="inline-block max-w-xl text-center justify-center">
-        <span className={title()}>Make&nbsp;</span>
-        <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
-        <br />
-        <span className={title()}>
-          websites regardless of your design experience.
-        </span>
-        <div className={subtitle({ class: "mt-4" })}>
-          Beautiful, fast and modern React UI library.
-        </div>
-      </div>
-
-      <div className="flex gap-3">
-        <Link
-          isExternal
-          className={buttonStyles({
-            color: "primary",
-            radius: "full",
-            variant: "shadow",
-          })}
-          href={siteConfig.links.docs}
-        >
-          Documentation
-        </Link>
-        <Link
-          isExternal
-          className={buttonStyles({ variant: "bordered", radius: "full" })}
-          href={siteConfig.links.github}
-        >
-          <GithubIcon size={20} />
-          GitHub
-        </Link>
-      </div>
-
-      <div className="mt-8">
-        <Snippet hideCopyButton hideSymbol variant="bordered">
-          <span>
-            Get started by editing <Code color="primary">app/page.tsx</Code>
-          </span>
-        </Snippet>
-      </div>
+    <section className="flex flex-col items-stretch gap-4">
+      <NewsfeedItem
+        username="Tailan"
+        avatar="https://x.egamesguru.de/storage/v1/object/public/images/3j1l4b3m4h5m3j4g3ou1t3m4h1r206o4e432963"
+        title="GTA 6 To Be Released in 2025"
+        thumbnail="https://gaming-cdn.com/images/products/2462/616x353/grand-theft-auto-vi-pc-spiel-rockstar-cover.jpg?v=1746543065"
+        body="
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque
+            natus ducimus itaque iure maiores magnam suscipit. Officia quas
+            voluptate pariatur corporis illum excepturi quam voluptas
+            accusantium accusamus magnam? Beatae, pariatur?
+          "
+        time="3 Std."
+      />
+      <NewsfeedItem
+        username="eGamesGuru"
+        avatar="https://x.egamesguru.de/storage/v1/object/public/images/685u1s1s1n54w10523u62h2c3f4b3r6u3le5i"
+        title="Exploring Los Santos in GTA Online!"
+        thumbnail="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/01/gta-v-8-small-details-that-enhance-the-open-world.jpg?q=50&fit=crop&w=1100&h=618&dpr=1.5"
+        body="
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque
+            natus ducimus itaque iure maiores magnam suscipit. Officia quas
+            voluptate pariatur corporis illum excepturi quam voluptas
+            accusantium accusamus magnam? Beatae, pariatur?
+          "
+        time="2 Std."
+      />
     </section>
+  );
+}
+
+function NewsfeedItem({
+  username,
+  avatar,
+  title,
+  thumbnail,
+  body,
+  time,
+}: {
+  username: string;
+  avatar: string | undefined;
+  title: string;
+  thumbnail: string;
+  body: string;
+  time: string;
+}) {
+  return (
+    <Card className="">
+      <CardHeader className="">
+        <div className="flex gap-3 items-center justify-between w-full">
+          <div className="flex gap-3 items-center">
+            <Avatar radius="full" size="md" src={avatar} />
+            <p>{username}</p>
+            <p className="text-default-400">{time}</p>
+          </div>
+          <Button variant="light" className="ml-auto">
+            Folgen
+          </Button>
+        </div>
+      </CardHeader>
+      <CardBody>
+        <div className="space-y-2">
+          <p className="font-semibold">{title}</p>
+          <img alt="" className="rounded-lg w-full" src={thumbnail} />
+          <p className="line-clamp-2">{body}</p>
+        </div>
+      </CardBody>
+      <CardFooter>
+        <div className="flex gap-4 justify-end w-full">
+          <Button isIconOnly variant="light">
+            <Icons.HandThumbUpIcon color="gray" className="w-8" />
+          </Button>
+          <Button isIconOnly variant="light">
+            <Icons.HandThumbDownIcon color="gray" className="w-8" />
+          </Button>
+          <Button isIconOnly variant="light">
+            <Icons.ShareIcon color="gray" className="w-8" />
+          </Button>
+        </div>
+      </CardFooter>
+    </Card>
   );
 }

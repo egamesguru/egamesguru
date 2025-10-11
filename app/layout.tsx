@@ -1,13 +1,16 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import { Link } from "@heroui/link";
+import { Button } from "@heroui/button";
+import * as Icons from "@heroicons/react/24/solid";
 import clsx from "clsx";
 
 import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
-import { Navbar } from "@/components/navbar";
+import { ReactElement, ReactNode } from "react";
+import { tv } from "tailwind-variants";
 
 export const metadata: Metadata = {
   title: {
@@ -27,6 +30,116 @@ export const viewport: Viewport = {
   ],
 };
 
+const navBarLinkStyle = tv({
+  base: "p-2",
+  variants: {
+    active: {
+      false: "text-default-500",
+      true: "text-primary",
+    },
+  },
+});
+
+const NavBarLink = ({
+  href,
+  label,
+  active = false,
+  children,
+}: {
+  href: string;
+  label: string;
+  active?: boolean;
+  children: React.ReactNode;
+}) => {
+  return (
+    <Button
+      as={Link}
+      isIconOnly
+      className={navBarLinkStyle({ active })}
+      variant="light"
+      aria-pressed
+      size="lg"
+      href={href}
+      aria-label={label}
+    >
+      {children}
+    </Button>
+  );
+};
+
+const NavBarLinkSidebar = ({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) => {
+  return (
+    <Link href={href} color="foreground" size="lg" className="font-semibold">
+      {children}
+    </Link>
+  );
+};
+
+const MobileLayout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div className="relative flex flex-col h-screen md:hidden">
+      <header className="py-3 px-4 flex justify-between">
+        <Link href="/" color="foreground" className="text-2xl font-bold">
+          eGamesGuru
+        </Link>
+        <Button isIconOnly variant="light">
+          <Icons.Bars3Icon className="w-8" />
+        </Button>
+      </header>
+      <main className="flex-grow overflow-auto px-4 py-2">{children}</main>
+      <nav className="flex px-2 justify-evenly w-full">
+        <NavBarLink href="/" label="Newsfeed" active>
+          <Icons.NewspaperIcon />
+        </NavBarLink>
+        <NavBarLink href="/contendership" label="Contendership">
+          <Icons.NumberedListIcon />
+        </NavBarLink>
+        <NavBarLink href="/pinnwand" label="Pinnwand">
+          <Icons.VideoCameraIcon />
+        </NavBarLink>
+        <NavBarLink href="/shop" label="Shop">
+          <Icons.BuildingStorefrontIcon />
+        </NavBarLink>
+        <NavBarLink href="/agency" label="Agency">
+          <Icons.PresentationChartLineIcon />
+        </NavBarLink>
+      </nav>
+    </div>
+  );
+};
+
+const DesktopLayout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div className="hidden md:flex">
+      <div className="p-6 w-md">
+        <header>
+          <Link href="/" color="foreground" className="text-3xl font-bold">
+            eGamesGuru
+          </Link>
+        </header>
+        <nav className="mt-8 flex flex-col gap-4">
+          <NavBarLinkSidebar href="/">Newsfeed</NavBarLinkSidebar>
+          <NavBarLinkSidebar href="/contendership">
+            Contendership
+          </NavBarLinkSidebar>
+          <NavBarLinkSidebar href="/shop">Shop</NavBarLinkSidebar>
+          <NavBarLinkSidebar href="/agency">Agency</NavBarLinkSidebar>
+        </nav>
+      </div>
+      <div className="py-20 grid grid-cols-2 w-full">
+        <main className="grow">{children}</main>
+        <aside className="grow "></aside>
+      </div>
+    </div>
+  );
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -42,23 +155,8 @@ export default function RootLayout({
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative flex flex-col h-screen">
-            <Navbar />
-            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
-              {children}
-            </main>
-            <footer className="w-full flex items-center justify-center py-3">
-              <Link
-                isExternal
-                className="flex items-center gap-1 text-current"
-                href="https://heroui.com?utm_source=next-app-template"
-                title="heroui.com homepage"
-              >
-                <span className="text-default-600">Powered by</span>
-                <p className="text-primary">HeroUI</p>
-              </Link>
-            </footer>
-          </div>
+          <MobileLayout>{children}</MobileLayout>
+          <DesktopLayout>{children}</DesktopLayout>
         </Providers>
       </body>
     </html>
