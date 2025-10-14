@@ -92,7 +92,7 @@ const MobileLayout = ({ children }: { children: React.ReactNode }) => {
           <Icons.Bars3Icon className="w-8" />
         </Button>
       </header>
-      <main className="flex-grow overflow-auto px-4 py-2">{children}</main>
+      <div className="flex-grow overflow-auto px-4 py-2">{children}</div>
       <nav className="flex px-2 justify-evenly w-full">
         <NavBarLink href="/" label="Newsfeed" active>
           <Icons.NewspaperIcon />
@@ -117,7 +117,7 @@ const MobileLayout = ({ children }: { children: React.ReactNode }) => {
 const DesktopLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="hidden md:flex">
-      <div className="p-6 w-md">
+      <div className="p-6 pt-10 w-md">
         <header>
           <Link href="/" color="foreground" className="text-3xl font-bold">
             eGamesGuru
@@ -132,10 +132,7 @@ const DesktopLayout = ({ children }: { children: React.ReactNode }) => {
           <NavBarLinkSidebar href="/agency">Agency</NavBarLinkSidebar>
         </nav>
       </div>
-      <div className="py-20 grid grid-cols-2 w-full">
-        <main className="grow">{children}</main>
-        <aside className="grow "></aside>
-      </div>
+      <div className="pt-10 w-full">{children}</div>
     </div>
   );
 };
