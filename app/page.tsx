@@ -97,17 +97,16 @@ const Newsfeed = async () => {
               : undefined;
 
           return (
-            <>
-              <NewsfeedItem
-                avatar={publicAvatarUrl}
-                thumbnail={publicThumbnailUrl ?? ""}
-                username={post.creator.fullname ?? "User"}
-                title={post.title ?? ""}
-                body={post.content ?? ""}
-                time="3 Std."
-                profileUrl={`/profile/${post.creator.id}`}
-              />
-            </>
+            <NewsfeedItem
+              key={post.id}
+              avatar={publicAvatarUrl}
+              thumbnail={publicThumbnailUrl ?? ""}
+              username={post.creator.fullname ?? "User"}
+              title={post.title ?? ""}
+              body={post.content ?? ""}
+              time="3 Std."
+              profileUrl={`/profile/${post.creator.id}`}
+            />
           );
         })}
       </div>
