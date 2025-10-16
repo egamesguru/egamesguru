@@ -7,6 +7,8 @@ import { Input, Textarea } from "@heroui/input";
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import { FormEvent, useState } from "react";
 import { createPost } from "./action";
+import { createClient } from "@/utils/supabase/client";
+import { redirect } from "next/navigation";
 
 const ThumbnailInput = () => {
   const [previewImgFile, setPreviewImgFile] = useState<File | null>(null);
@@ -41,8 +43,6 @@ const ThumbnailInput = () => {
           htmlFor="thumbnail"
           className="block cursor-pointer w-full bg-gray-900 aspect-video rounded-xl"
         >
-          {console.log(previewImgFile)}
-
           {previewImgFile != null ? (
             <img
               src={URL.createObjectURL(previewImgFile)}
@@ -59,7 +59,17 @@ const ThumbnailInput = () => {
   );
 };
 
-export default function NewPostPage() {
+export default async function NewPostPage() {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  console.log("user", user);
+  if (authError || !user) redirect("/login");
+
   return (
     <>
       <section className="flex flex-col items-stretch gap-4 max-h-screen">

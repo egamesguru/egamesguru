@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { updateAvatar, updateFullname } from "./actions";
+import { updateFullname } from "./actions";
 import { AvatarUpload } from "./avatar-upload";
 import { Input } from "@heroui/input";
 import { Form } from "@heroui/form";
