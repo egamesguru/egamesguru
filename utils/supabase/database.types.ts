@@ -34,6 +34,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      posts: {
+        Row: {
+          content: string | null
+          created_at: string
+          creator: string
+          id: number
+          thumbnail: string | null
+          title: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          creator: string
+          id?: number
+          thumbnail?: string | null
+          title?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          creator?: string
+          id?: number
+          thumbnail?: string | null
+          title?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar: string | null
