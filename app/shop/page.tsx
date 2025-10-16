@@ -1,7 +1,9 @@
 export default function ShopPage() {
   return (
-    <div>
-      <h1>Shop</h1>
-    </div>
+    <section>
+      <div className="flex gap-4 items-center">
+        <h1 className="text-3xl font-light">Shop</h1>
+      </div>
+    </section>
   );
 }
