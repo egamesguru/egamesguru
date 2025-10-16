@@ -9,7 +9,7 @@ export async function updateFullname(formData: FormData) {
 
   const {
     data: { user },
-    authError,
+    error: authError,
   } = await supabase.auth.getUser();
 
   if (authError || !user) redirect("/error");

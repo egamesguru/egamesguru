@@ -18,8 +18,6 @@ export function AvatarUpload({
 }) {
   const supabase = createClient();
 
-  const router = useRouter();
-
   const publicAvatarUrl =
     avatarUrl != null
       ? supabase.storage.from("avatars").getPublicUrl(avatarUrl).data.publicUrl
@@ -59,7 +57,7 @@ export function AvatarUpload({
           size="lg"
           radius="lg"
           name={name}
-          className="w-20 h-20"
+          className="w-24 h-24"
         />
       </label>
     </div>
