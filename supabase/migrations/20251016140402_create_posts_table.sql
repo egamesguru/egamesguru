@@ -8,7 +8,7 @@ create table "public"."posts" (
 );
 
 
-alter table "public"."posts" add constraint "posts_creator_fkey" FOREIGN KEY (creator) REFERENCES auth.users(id) ON DELETE CASCADE not valid;
+alter table "public"."posts" add constraint "posts_creator_fkey" FOREIGN KEY (creator) REFERENCES profiles(id) ON DELETE CASCADE not valid;
 
 alter table "public"."posts" validate constraint "posts_creator_fkey";
 
