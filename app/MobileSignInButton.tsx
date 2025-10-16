@@ -51,7 +51,7 @@ const SignInButton = () => {
 
   console.log("pathname", pathname);
 
-  if (pathname === "/login") return <></>;
+  if (pathname === "/signup" || pathname === "/login") return <></>;
 
   if (profile != null) {
     const publicAvatarUrl =
@@ -75,7 +75,7 @@ const SignInButton = () => {
   return (
     <Button
       as={Link}
-      href="/login"
+      href="/signup"
       size="lg"
       color="primary"
       endContent={<ArrowRightEndOnRectangleIcon className="size-5" />}

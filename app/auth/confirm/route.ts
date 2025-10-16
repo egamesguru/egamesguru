@@ -22,11 +22,15 @@ export async function GET(request: NextRequest) {
     });
 
     console.log("user data", data);
+    console.log("user metadata", data?.user?.user_metadata);
+    const fullname = (data?.user?.user_metadata.fullname as string) ?? "";
 
     if (!error) {
       // create profile for user
       const uid = data.user?.id;
-      const { error } = await supabase.from("profiles").upsert({ id: uid! });
+      const { error } = await supabase
+        .from("profiles")
+        .upsert({ id: uid!, fullname });
       if (!error) {
         redirectTo.searchParams.delete("next");
         return NextResponse.redirect(redirectTo);

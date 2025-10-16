@@ -1,34 +1,50 @@
-import { Input } from "@heroui/input";
-import { login } from "./action";
 import { Button } from "@heroui/button";
-import { Form } from "@heroui/form";
 import { Divider } from "@heroui/divider";
+import { Form } from "@heroui/form";
+import { Input } from "@heroui/input";
+import { signup } from "./action";
 import { Link } from "@heroui/link";
 
-export default function LoginPage() {
+export default function SignupPage() {
   return (
     <section className="space-y-10 md:max-w-md">
       <div className="">
-        <h1 className="text-3xl font-light">Einloggen</h1>
+        <h1 className="text-3xl font-light">Registrieren</h1>
       </div>
 
       <div>
         <h2 className="text-lg">
-          Logge dich mit deiner Email Adresse und deinem Passwort an.
+          Tritt der eGamesGuru Community bei, um nichts mehr zu verpassen.
         </h2>
 
-        <p className="text-xs mt-1">
-          Noch kein Account? Jetzt{" "}
-          <Link href="/signup" size="sm" className="text-xs">
-            Registrieren
+        <p className="text-xs mt-2">
+          Bereits registriert? Jetzt{" "}
+          <Link href="/login" size="sm" className="text-xs">
+            Einloggen
           </Link>
           .
         </p>
       </div>
 
       <div>
-        <Form className="md:max-w-xs flex flex-col items-center" action={login}>
+        <Form
+          className="md:max-w-xs flex flex-col items-center"
+          action={signup}
+        >
           <Divider />
+
+          <Input
+            type="text"
+            id="fullname"
+            name="fullname"
+            label="Spitzname"
+            placeholder="Naruto Uzumaki"
+            required
+            variant="underlined"
+            labelPlacement="outside-top"
+            fullWidth
+            className="mt-5"
+          />
 
           <Input
             type="email"
@@ -40,7 +56,6 @@ export default function LoginPage() {
             variant="underlined"
             labelPlacement="outside-top"
             fullWidth
-            className="mt-5"
           />
 
           <Input
@@ -50,16 +65,17 @@ export default function LoginPage() {
             label="Password"
             placeholder="secretpassword"
             required
+            minLength={8}
             variant="underlined"
             labelPlacement="outside-top"
             fullWidth
           />
 
-          <Divider />
+          <Divider className="" />
 
           <div className="mt-5">
             <Button type="submit" color="primary">
-              Einloggen
+              Registrieren
             </Button>
           </div>
         </Form>
