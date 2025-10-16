@@ -4,6 +4,27 @@ import { Button } from "@heroui/button";
 import { avatar } from "@heroui/theme";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/solid";
+import { revalidatePath } from "next/cache";
+
+async function logout(formData: FormData) {
+  "use server";
+
+  console.log("logout");
+
+  const supabase = await createClient();
+
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    console.error(error);
+    redirect("/error");
+  }
+
+  revalidatePath("/", "layout");
+  
+  redirect("/");
+}
 
 export default async function Account() {
   const supabase = await createClient();
@@ -33,7 +54,7 @@ export default async function Account() {
       : undefined;
 
   return (
-    <div className="grow space-y-10">
+    <div className="space-y-10">
       <div className="flex gap-4 items-center">
         <h1 className="text-3xl font-light">Mein Profil</h1>
       </div>
@@ -48,9 +69,7 @@ export default async function Account() {
         />
 
         <div>
-          <p className="text-xl font-semibold">
-            {profile.fullname ?? "User"}
-          </p>
+          <p className="text-xl font-semibold">{profile.fullname ?? "User"}</p>
           <div className="flex gap-4 text-xl">
             <p>Follower: 0</p>
             <p>Ranking: 1</p>
@@ -58,9 +77,23 @@ export default async function Account() {
         </div>
       </div>
 
-      <Button as={Link} href="/account/edit">
-        Bearbeiten
-      </Button>
+      <div className="gap-5 flex">
+        <Button as={Link} href="/account/edit">
+          Bearbeiten
+        </Button>
+
+        <form action={logout}>
+          <Button
+            type="submit"
+            className="bg-rose-700"
+            endContent={
+              <ArrowRightStartOnRectangleIcon className="size-5 shrink-0" />
+            }
+          >
+            Ausloggen
+          </Button>
+        </form>
+      </div>
     </div>
   );
 }
