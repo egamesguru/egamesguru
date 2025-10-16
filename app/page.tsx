@@ -5,7 +5,11 @@ import { Button } from "@heroui/button";
 
 export default function Home() {
   return (
-    <section className="flex flex-col items-stretch gap-4">
+    <section className="flex flex-col items-stretch gap-4 md:max-w-lg">
+      <div className="flex gap-4 items-center">
+        <h1 className="text-3xl font-light">Newsfeed</h1>
+      </div>
+
       <NewsfeedItem
         username="Tailan"
         avatar="https://x.egamesguru.de/storage/v1/object/public/images/3j1l4b3m4h5m3j4g3ou1t3m4h1r206o4e432963"
