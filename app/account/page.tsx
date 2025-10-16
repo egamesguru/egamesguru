@@ -1,7 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { Avatar } from "@heroui/avatar";
 import { Button } from "@heroui/button";
-import { avatar } from "@heroui/theme";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/solid";
