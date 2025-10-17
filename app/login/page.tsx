@@ -4,8 +4,15 @@ import { Button } from "@heroui/button";
 import { Form } from "@heroui/form";
 import { Divider } from "@heroui/divider";
 import { Link } from "@heroui/link";
+import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  const supabase = await createClient();
+
+  const { data } = await supabase.auth.getUser();
+  if (data) redirect("/account");
+
   return (
     <section className="space-y-10 md:max-w-md">
       <div className="">
