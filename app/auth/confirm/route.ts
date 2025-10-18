@@ -9,6 +9,8 @@ export async function GET(request: NextRequest) {
   const next = "/account";
 
   const redirectTo = request.nextUrl.clone();
+  console.log("redirectTo", redirectTo);
+
   redirectTo.pathname = next;
   redirectTo.searchParams.delete("token_hash");
   redirectTo.searchParams.delete("type");
