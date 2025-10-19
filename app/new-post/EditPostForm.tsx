@@ -7,6 +7,7 @@ import { Input, Textarea } from "@heroui/input";
 import { createPost } from "./action";
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import { FormEvent, useState } from "react";
+import { Link } from "@heroui/react";
 
 export default function EditPostForm() {
   return (
@@ -40,7 +41,9 @@ export default function EditPostForm() {
       <Divider />
 
       <div className="flex justify-end gap-4 py-2">
-        <Button variant="flat">Abbrechen</Button>
+        <Button as={Link} href="/" variant="flat">
+          Abbrechen
+        </Button>
         <Button type="submit" color="primary">
           Posten
         </Button>
