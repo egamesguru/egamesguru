@@ -66,26 +66,28 @@ const ContenderUser = ({
 
 export default function ContendershipPage() {
   return (
-    <section className="space-y-10 max-h-screen flex flex-col">
-      <div>
+    <section className="grow flex flex-col items-stretch">
+      <div className="px-4 md:px-0">
         <h1 className="text-3xl font-light">Contendership</h1>
         <h2 className="text-lg">Top Creator der aktuellen Season.</h2>
       </div>
 
-      <div className="flex gap-8">
-        <div className="font-bold">Aktuelle Season</div>
-        <div className="overflow-ellipsis">Noch 16 Tage</div>
-      </div>
+      <div className="mt-10 grow overflow-y-auto md:overflow-hidden flex flex-col items-stretch">
+        <div className="flex gap-8 px-4 md:px-0">
+          <div className="font-bold">Aktuelle Season</div>
+          <div className="overflow-ellipsis">Noch 16 Tage</div>
+        </div>
 
-      <div className="grow md:overflow-y-auto">
-        <RankingsMobile
-          youtubeRanking={contenders}
-          twitchRanking={contenders}
-        />
-        <RankingsDesktop
-          youtubeRanking={contenders}
-          twitchRanking={contenders}
-        />
+        <div className="mt-10 md:overflow-y-auto grow">
+          <RankingsMobile
+            youtubeRanking={contenders}
+            twitchRanking={contenders}
+          />
+          <RankingsDesktop
+            youtubeRanking={contenders}
+            twitchRanking={contenders}
+          />
+        </div>
       </div>
     </section>
   );
@@ -99,7 +101,7 @@ const RankingsMobile = ({
   twitchRanking: ContenderUser[];
 }) => {
   return (
-    <div className="lg:hidden md:px-2">
+    <div className="lg:hidden px-4 h-full">
       <Tabs
         aria-label="Options"
         className="w-full"

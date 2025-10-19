@@ -181,7 +181,7 @@ const SidebarDesktop = () => {
 const TopbarMobile = () => {
   return (
     <>
-      <header className="py-3 px-4 flex justify-between md:hidden">
+      <header className="py-3 px-4 z-20 fixed inset-x-0 top-0 w-full bg-background flex justify-between md:hidden">
         <Link href="/" color="foreground" className="text-2xl font-bold">
           eGamesGuru
         </Link>
@@ -197,7 +197,7 @@ const TopbarMobile = () => {
 const BottombarMobile = () => {
   return (
     <>
-      <nav className="flex px-2 justify-evenly w-full md:hidden">
+      <nav className="flex z-20 px-2 justify-evenly fixed inset-x-0 bottom-0 bg-background w-full md:hidden">
         <NavBarLink href="/" label="Newsfeed" active>
           <Icons.NewspaperIcon />
         </NavBarLink>
@@ -221,12 +221,12 @@ const BottombarMobile = () => {
 const ResponsiveLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <div className="flex flex-col md:flex-row h-screen overflow-y-hidden">
+      <div className="w-screen h-screen flex flex-col md:flex-row overflow-hidden pt-22 pb-12 md:pt-0 md:py-0">
         <SidebarDesktop />
 
         <TopbarMobile />
 
-        <div className="grow mt-10 px-4 md:px-0 overflow-y-auto md:overflow-y-hidden">
+        <div className="grow overflow-y-auto md:pt-10 flex">
           {children}
         </div>
 

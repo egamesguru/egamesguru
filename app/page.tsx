@@ -13,7 +13,7 @@ const NewPostButton = () => {
       href="/new-post"
       color="primary"
       variant="shadow"
-      className="fixed bottom-16 md:bottom-6 right-5 md:right-9 z-20"
+      className="fixed bottom-16 md:bottom-6 right-5 md:right-9 z-10"
       startContent={<PlusIcon className="size-5 shrink-0" />}
     >
       New Post
@@ -81,7 +81,7 @@ const Newsfeed = async () => {
 
   return (
     <>
-      <div className="md:max-w-lg flex flex-col items-stretch gap-4 pb-15">
+      <div className="md:max-w-lg flex flex-col items-stretch gap-4">
         {posts.map((post) => {
           const publicAvatarUrl =
             post.creator.avatar != null
@@ -117,12 +117,12 @@ const Newsfeed = async () => {
 export default function Home() {
   return (
     <>
-      <section className="flex flex-col items-stretch gap-4 max-h-screen">
-        <div className="flex gap-4 items-center">
+      <section className="flex flex-col items-stretch gap-4 grow overflow-hidden">
+        <div className="px-4 md:px-0">
           <h1 className="text-3xl font-light">Newsfeed</h1>
         </div>
 
-        <div className="md:overflow-y-auto mt-5">
+        <div className="overflow-y-auto px-4 py-4 md:px-0">
           <Newsfeed />
         </div>
       </section>
