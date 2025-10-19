@@ -10,33 +10,36 @@ import { FormEvent, useState } from "react";
 
 export default function EditPostForm() {
   return (
-    <Form action={createPost}>
+    <Form
+      action={createPost}
+      className="grow flex flex-col items-stretch overflow-hidden"
+    >
       <Divider />
 
-      <ThumbnailInput />
+      <div className="flex flex-col items-stretch gap-5 overflow-y-auto">
+        <ThumbnailInput />
 
-      <Input
-        label="Titel"
-        name="title"
-        id="title"
-        className="mt-5"
-        required
-        minLength={5}
-        maxLength={100}
-      />
+        <Input
+          label="Titel"
+          name="title"
+          id="title"
+          required
+          minLength={5}
+          maxLength={100}
+        />
 
-      <Textarea
-        label="Inhalt"
-        name="content"
-        id="content"
-        className="mt-5"
-        minLength={10}
-        required
-      />
+        <Textarea
+          label="Inhalt"
+          name="content"
+          id="content"
+          minLength={10}
+          required
+        />
+      </div>
 
-      <Divider className="mt-5" />
+      <Divider />
 
-      <div className="w-full flex justify-end gap-4 py-5">
+      <div className="flex justify-end gap-4 py-2">
         <Button variant="flat">Abbrechen</Button>
         <Button type="submit" color="primary">
           Posten

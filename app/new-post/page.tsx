@@ -15,15 +15,16 @@ export default async function NewPostPage() {
 
   return (
     <>
-      <section className="flex flex-col items-stretch gap-4 max-h-screen">
-        <div className="flex gap-4 items-center">
+      <section className="flex flex-col items-stretch gap-8 grow overflow-hidden">
+        <div className="flex gap-4 items-center px-4 md:px-0">
           <h1 className="text-3xl font-light">Post erstellen</h1>
         </div>
 
-        <div className="md:overflow-y-auto">
-          <div className="max-w-lg mx-auto md:mx-0">
-            <EditPostForm />
-          </div>
+        <div className="
+        px-4 md:px-0 grow overflow-hidden flex flex-col items-stretch
+        w-full max-w-lg mx-auto md:mx-0
+        ">
+          <EditPostForm />
         </div>
       </section>
     </>
