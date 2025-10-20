@@ -6,6 +6,7 @@ import { Link } from "@heroui/link";
 import { redirect } from "next/navigation";
 import { FaYoutube, FaTwitch } from "react-icons/fa";
 import * as Icons from "@heroicons/react/24/outline";
+import ProfileGenres from "@/components/ProfileGenres";
 
 export default async function ProfilePage({
   params,
@@ -19,7 +20,18 @@ export default async function ProfilePage({
 
   const { data: profile, error } = await supabase
     .from("profiles")
-    .select()
+    .select(
+      `
+        id,
+        fullname,
+        avatar,
+        profiles_genres (
+            genre (
+                title
+            )
+        )
+    `,
+    )
     .eq("id", id)
     .single();
 
@@ -33,6 +45,8 @@ export default async function ProfilePage({
       ? supabase.storage.from("avatars").getPublicUrl(profile.avatar).data
           .publicUrl
       : undefined;
+
+  const genres = profile?.profiles_genres?.map(({ genre: { title } }) => title);
 
   const { data: postsData, error: postsError } = await supabase
     .from("posts")
@@ -94,6 +108,8 @@ export default async function ProfilePage({
             YouTube
           </Button>
         </div>
+
+        {genres.length > 0 && <ProfileGenres genres={genres} />}
 
         <div className="px-4 md:px-0">
           <h2 className="text-xl">Letzte Beiträge</h2>
