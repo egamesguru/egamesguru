@@ -34,6 +34,21 @@ export type Database = {
   }
   public: {
     Tables: {
+      genres: {
+        Row: {
+          id: number
+          title: string
+        }
+        Insert: {
+          id?: number
+          title: string
+        }
+        Update: {
+          id?: number
+          title?: string
+        }
+        Relationships: []
+      }
       posts: {
         Row: {
           content: string | null
@@ -86,6 +101,36 @@ export type Database = {
           id?: string
         }
         Relationships: []
+      }
+      profiles_genres: {
+        Row: {
+          genre: number
+          profile: string
+        }
+        Insert: {
+          genre: number
+          profile: string
+        }
+        Update: {
+          genre?: number
+          profile?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_genres_genre_fkey"
+            columns: ["genre"]
+            isOneToOne: false
+            referencedRelation: "genres"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "profiles_genres_profile_fkey"
+            columns: ["profile"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
