@@ -34,7 +34,9 @@ export default function PreferencesForm() {
         ))}
       </CheckboxGroup>
 
-      <Button type="submit" color="primary">Übernehmen</Button>
+      <Button type="submit" color="primary">
+        Übernehmen
+      </Button>
     </Form>
   );
 }
@@ -80,6 +82,7 @@ const ChipCheckbox = (props: { value: string; children: ReactNode }) => {
         <input {...getInputProps()} />
       </VisuallyHidden>
 
+      {/* @ts-ignore */}
       <Chip
         classNames={{
           base: styles.base(),
