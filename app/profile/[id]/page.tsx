@@ -49,12 +49,12 @@ export default async function ProfilePage({
 
   return (
     <>
-      <div className="space-y-10 md:h-screen md:overflow-y-auto">
-        <div className="flex gap-4 items-center">
+      <div className="grow space-y-10">
+        <div className="flex gap-4 items-center px-4 md:px-0">
           <h1 className="text-3xl font-light">Pinnwand</h1>
         </div>
 
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4 items-center px-4 md:px-0">
           <Avatar
             src={publicAvatarUrl}
             size="lg"
@@ -74,7 +74,7 @@ export default async function ProfilePage({
           </div>
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex gap-4 px-4 md:px-0">
           <Button
             as={Link}
             href="https://youtube.com/"
@@ -95,7 +95,7 @@ export default async function ProfilePage({
           </Button>
         </div>
 
-        <div className="h-full">
+        <div className="px-4 md:px-0">
           <h2 className="text-xl">Letzte Beiträge</h2>
 
           <div className="md:max-w-lg flex flex-col items-stretch gap-4 pb-15 mt-5">
