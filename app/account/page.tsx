@@ -5,6 +5,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/solid";
 import { revalidatePath } from "next/cache";
+import ProfileGenres from "@/components/ProfileGenres";
 
 async function logout(formData: FormData) {
   "use server";
@@ -21,7 +22,7 @@ async function logout(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  
+
   redirect("/");
 }
 
@@ -38,11 +39,24 @@ export default async function Account() {
 
   const { data: profile, error: profileError } = await supabase
     .from("profiles")
-    .select()
+    .select(
+      `
+        id,
+        fullname,
+        avatar,
+        profiles_genres (
+            genre (
+                title
+            )
+        )
+    `,
+    )
     .eq("id", user?.id)
     .single();
 
   console.log("profile", profile);
+
+  const genres = profile?.profiles_genres?.map(({ genre: { title } }) => title);
 
   if (profileError || !profile) redirect("/error");
 
@@ -92,6 +106,16 @@ export default async function Account() {
             Ausloggen
           </Button>
         </form>
+      </div>
+
+      <div className="space-y-4">
+        <div className="flex items-center gap-2">
+          <h2 className="text-lg font-bold">Interessen</h2>
+          <Button as={Link} href="/account/preferences" size="sm">
+            Anpassen
+          </Button>
+        </div>
+        {genres != null && <ProfileGenres genres={genres} />}
       </div>
     </div>
   );
